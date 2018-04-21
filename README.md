@@ -2,6 +2,28 @@
 
 All the pipeline for Data preprocessing is here
 
+# Replace Missing values
+
+# missing data replace NaN with average
+from sklearn.preprocessing import Imputer
+imputer = Imputer(missing_values='NaN', strategy='mean', axis=0)
+imputer=imputer.fit(X[:,1:3])
+X[:,1:3]=imputer.transform(X[:,1:3])
+
+# categorical data encoding to integer variables
+
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+labelencoder_X=LabelEncoder()
+X[:,0]=labelencoder_X.fit_transform(X[:,0])
+onehotEncoder= OneHotEncoder(categorical_features=[0])
+X=onehotEncoder.fit_transform(X).toarray()
+# Encoding the Dependent Variable if needed from Yes/No to 1 and 0
+
+labelencoder_y = LabelEncoder()
+y = labelencoder_y.fit_transform(y)
+
+
+
 Preparing the Data
 Before data can be used as input for machine learning algorithms, it often must be cleaned, formatted, and restructured — this is typically known as preprocessing. Fortunately, for this dataset, there are no invalid or missing entries we must deal with, however, there are some qualities about certain features that must be adjusted. This preprocessing can help tremendously with the outcome and predictive power of nearly all learning algorithms.
 
